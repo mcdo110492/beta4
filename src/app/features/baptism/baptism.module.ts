@@ -7,7 +7,9 @@ import { BaptismComponent } from './baptism.component';
 
 
 import { BaptismService } from './baptism.service';
-import { BaptismFormEditorComponent } from './baptism-form-editor/baptism-form-editor.component';
+import { BaptismEditorComponent } from './baptism-editor/baptism-editor.component';
+import { BaptismFormComponent } from './baptism-form/baptism-form.component';
+import { BaptismCreateComponent } from './baptism-create/baptism-create.component';
 
 @NgModule({
   imports: [
@@ -15,7 +17,7 @@ import { BaptismFormEditorComponent } from './baptism-form-editor/baptism-form-e
     BaptismRoutingModule,
     
   ],
-  declarations: [BaptismComponent, BaptismFormEditorComponent],
+  declarations: [BaptismComponent, BaptismEditorComponent, BaptismFormComponent, BaptismCreateComponent],
   providers:[BaptismService]
 })
 export class BaptismModule { }

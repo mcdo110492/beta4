@@ -1,0 +1,24 @@
+
+
+
+    <md-card>
+      <md-card-header fxLayout fxflex>
+        <md-card-title fxFlex class="card-title">Baptism Details</md-card-title>
+        <div fxFlex></div>
+      </md-card-header>
+      <md-card-content>
+        
+                  
+      </md-card-content>
+    </md-card>
+  
+    
+    <!-- Start Form Component Here -->
+    <div *ngIf="baptism">
+    <app-baptism-form [baptism]="baptism" ></app-baptism-form>
+    </div>
+    <!-- End Form Component Here -->
+
+
+
+
