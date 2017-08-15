@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardStateService } from './../../_services/auth-guard-state.service';
 import { BaptismComponent } from './baptism.component';
-import { BaptismFormEditorComponent } from './baptism-form-editor/baptism-form-editor.component';
+import { BaptismCreateComponent } from './baptism-create/baptism-create.component';
+import { BaptismEditorComponent } from './baptism-editor/baptism-editor.component';
 
 const routes: Routes = [
   { path: '', component: BaptismComponent, data: {animation:'baptism'}, canActivate:[AuthGuardStateService] },
-  { path: 'detail/:id', component: BaptismFormEditorComponent, data: {animation:'baptism/detail'}, canActivate:[AuthGuardStateService] },
+  { path: 'create', component: BaptismCreateComponent, data: {animation:'baptism/create'}, canActivate:[AuthGuardStateService] },
+  { path: 'detail/:id', component: BaptismEditorComponent, data: {animation:'baptism/detail'}, canActivate:[AuthGuardStateService] },
 ];
 
 @NgModule({
