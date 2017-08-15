@@ -1,0 +1,14 @@
+.app-container {
+    position:'fixed';
+    width: 100%;
+    height: 100%;
+}
+
+.loader-indicator {
+    z-index: 999;
+    position: absolute;
+    height: 4px;
+}
+
+
+

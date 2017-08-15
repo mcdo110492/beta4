@@ -1,0 +1,52 @@
+
+    <md-card>
+      <md-card-header fxLayout fxflex>
+        <md-card-title fxFlex class="card-title">Priest List</md-card-title>
+        <div fxFlex></div>
+        <button md-raised-button class="card-button" color="accent" fxFlexAlign="end">Add New Record</button>
+      </md-card-header>
+      <md-card-content>
+        
+                  
+      </md-card-content>
+    </md-card>
+
+<div class="card-content-container mat-elevation-z8">
+  <div class="card-header">
+              <md-input-container  class="search-input-container">
+                <input type="search" mdInput [(ngModel)]="searchFilter" (ngModelChange)="newSearchFilter(searchFilter)" placeholder="Search Name" >
+              </md-input-container>
+        </div>
+  <div class="table-content">
+        <md-table   #table [dataSource]="dataSource" mdSort (mdSortChange)="tableChangeEvent()" [trackBy]="tableTrackBy" >
+
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+            <ng-container cdkColumnDef="priest_name">
+              <md-header-cell *cdkHeaderCellDef md-sort-header> Priest Name </md-header-cell>
+              <md-cell *cdkCellDef="let row"> {{row.priest_name}} </md-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="status">
+              <md-header-cell *cdkHeaderCellDef > Status </md-header-cell>
+              <md-cell *cdkCellDef="let row"> {{row.status}} </md-cell>
+            </ng-container>
+
+
+            <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>
+            <md-row *cdkRowDef="let row; columns: displayedColumns;"></md-row>
+        </md-table>
+  </div>
+
+    <md-paginator #paginator
+                [length]="pageDataLength"
+                [pageIndex]="pageIndex"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                (page) = "tableChangeEvent()"
+                >
+      </md-paginator>
+  
+</div>
+

@@ -1,0 +1,49 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { HttpClientModule } from '@angular/common/http';
+
+
+//Shared Module
+import 'hammerjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
+
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
+
+
+//Routing Module
+import { AppRoutingModule, PrimaryRouteComponents } from './app-routing.module';
+
+
+//Eagerly Loaded Component
+import { AppComponent } from './app.component';
+
+//Core Module for the Global Services
+import { CoreModule } from './core/core.module';
+import { ProgressDialogComponent } from './main/progress-dialog/progress-dialog.component';
+
+
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    PrimaryRouteComponents,
+    ProgressDialogComponent
+  ],
+  entryComponents:[
+    ProgressDialogComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    SharedModule,
+    CoreModule,
+    AppRoutingModule,
+    ToastModule.forRoot()
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
