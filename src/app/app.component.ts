@@ -6,6 +6,7 @@ import { fadeInAnimation } from './_animations/fade-in-out.animation';
 import { Router } from '@angular/router';
 import { ToolbarLoadingIndicatorService } from './_services/toolbar-loading-indicator.service';
 
+
 import { ToastsManager  } from 'ng2-toastr/ng2-toastr';
 
 
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
   constructor(public toolbarLoadingIndicatorService : ToolbarLoadingIndicatorService,
               public router: Router,
               public toaster : ToastsManager,
-              vRef : ViewContainerRef  ){
+              vRef : ViewContainerRef ){
                 toaster.setRootViewContainerRef(vRef);
                }
 
@@ -40,6 +41,9 @@ export class AppComponent implements OnInit {
   prepRouteState(outlet : any ){
     return outlet.activatedRouteData['animation'];
   }
+
+
+ 
 
 
 }

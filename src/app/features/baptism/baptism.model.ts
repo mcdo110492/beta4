@@ -17,7 +17,7 @@ export class Baptism {
   sponsors?     : string;
   remarks?      : string;
   minister_id   : number;
-  minister      : Minister;
+  minister?     : Minister;
   created_at?   : Date;
   updated_at?   : Date;
 }

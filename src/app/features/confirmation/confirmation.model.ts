@@ -15,7 +15,8 @@ export class Confirmation {
   page_no            : number;
   sponsors?          : string;
   remarks?           : string;
-  minister           : Minister;
+  minister_id        : number;
+  minister?          : Minister;
   created_at?        : Date;
   updated_at?        : Date;
 }
