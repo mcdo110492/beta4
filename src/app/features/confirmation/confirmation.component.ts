@@ -32,7 +32,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
 
   // Table Options
   //Column Definition for the Data Table
-  displayedColumns = ['child_name', 'confirmation_date', 'baptism_date' ,'book_no', 'page_no','minister'];
+  displayedColumns = ['child_name', 'confirmation_date', 'baptism_date' ,'book_no', 'page_no','minister','action'];
   dataSource : TableDataSourceService | null;
   
 

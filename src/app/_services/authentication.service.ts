@@ -22,6 +22,8 @@ interface LoginResponse {
   error?  : string;
 }
 
+
+
 @Injectable()
 export class AuthenticationService {
 
@@ -56,5 +58,11 @@ export class AuthenticationService {
                 .post<LoginResponse>(`${this.baseUrl}/authenticate` , credentials);
 
   }
+
+
+
+
+
+  
 
 }

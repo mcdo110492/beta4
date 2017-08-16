@@ -124,6 +124,7 @@ export class BaptismFormComponent implements OnInit, OnChanges, OnDestroy {
       .saveData(this.baptismForm.value)
       .subscribe((res) => {
         if(res.status == 200){
+          this.resetForm();
           this._toaster.showSuccess();
         }
 

@@ -12,6 +12,11 @@ interface  IDataResponse {
   data  : Confirmation[];
 }
 
+interface IStatusResponse {
+  status  : number;
+  message : string;
+}
+
 
 @Injectable()
 export class ConfirmationService {
@@ -32,6 +37,22 @@ export class ConfirmationService {
                     .get<IDataResponse>(`${this.baseUrl}/confirmation`,
                     { params : params } );
 
+  }
+
+  saveData(data : Confirmation){
+    return this.http
+                    .post<IStatusResponse>(`${this.baseUrl}/confirmation`,data);
+  }
+
+  getData(id : number){
+    return this.http
+                    .get<Confirmation>(`${this.baseUrl}/confirmation/${id}`);
+  }
+
+
+  updateData(data : Confirmation){
+    return this.http
+                    .put<IStatusResponse>(`${this.baseUrl}/confirmation/${data.confirmation_id}`,data);
   }
 
  

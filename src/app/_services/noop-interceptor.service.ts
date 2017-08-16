@@ -21,14 +21,19 @@ export class NoopInterceptor implements HttpInterceptor {
     //get the token in the obj if it exist or not pass the empty value
     const authHeader = (obj) ? obj.token : '';
 
+
+
+
     //set the header to authorization header in every request
-    const authRequest = req.clone({setHeaders: {Authorization: `Bearer ${authHeader}`}});
+    const authRequest = req.clone({setHeaders: {Authorization: `Bearer ${authHeader}` }});
 
     //Transform and handle all the http client request
     return next
             .handle(authRequest);
 
   }
+
+
 
 
 
