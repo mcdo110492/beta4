@@ -31,7 +31,7 @@ export class DeathComponent implements OnInit, OnDestroy {
   latestSearchFilter = new Subject<string>();
 
   // Table Options
-  displayedColumns = ['deceased_name', 'date_death', 'place_burial','date_burial' ,'book_no', 'page_no','entry_no','minister'];
+  displayedColumns = ['deceased_name', 'date_death', 'place_burial','date_burial' ,'book_no', 'page_no','entry_no','minister','action'];
   dataSource : TableDataSourceService | null;
   
 

@@ -3,7 +3,6 @@
 export const superAdminMetaData = [
     { isHeader : true, header : 'master data' , 
       list :[
-        { title : 'priest', routeUrl : 'priest', icon :'storage' },
         { title : 'minister', routeUrl : 'minister', icon :'storage' }
       ] 
     },

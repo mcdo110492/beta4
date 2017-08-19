@@ -12,6 +12,11 @@ interface  IDataResponse {
   data  : Death[];
 }
 
+interface IStatusResponse {
+  status  : number;
+  message : string;
+}
+
 @Injectable()
 export class DeathService {
 
@@ -31,6 +36,22 @@ export class DeathService {
                     .get<IDataResponse>(`${this.baseUrl}/death`,
                     { params : params } );
 
+  }
+
+  saveData(data : Death){
+    return this.http
+                    .post<IStatusResponse>(`${this.baseUrl}/death`,data);
+  }
+
+  getData(id : number){
+    return this.http
+                    .get<Death>(`${this.baseUrl}/death/${id}`);
+  }
+
+
+  updateData(data : Death){
+    return this.http
+                    .put<IStatusResponse>(`${this.baseUrl}/death/${data.death_id}`,data);
   }
 
 }

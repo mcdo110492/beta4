@@ -12,6 +12,11 @@ interface  IDataResponse {
   data  : Minister[];
 }
 
+interface IStatusResponse {
+  status  : number;
+  message : string;
+}
+
 @Injectable()
 export class MinisterService {
 
@@ -31,6 +36,32 @@ export class MinisterService {
                     .get<IDataResponse>(`${this.baseUrl}/minister`,
                     { params : params } );
 
+  }
+
+  changeStatus(id : number , status : number){
+    const data = {
+      minister_id : id,
+      status : status
+    };
+
+    return this.http
+               .post<IStatusResponse>(`${this.baseUrl}/minister/status`,data);
+  }
+
+  saveData(data : Minister){
+    return this.http
+                    .post<IStatusResponse>(`${this.baseUrl}/minister`,data);
+  }
+
+  getData(id : number){
+    return this.http
+                    .get<Minister>(`${this.baseUrl}/minister/${id}`);
+  }
+
+
+  updateData(data : Minister){
+    return this.http
+                    .put<IStatusResponse>(`${this.baseUrl}/minister/${data.minister_id}`,data);
   }
 
 }

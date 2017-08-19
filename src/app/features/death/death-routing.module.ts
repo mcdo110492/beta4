@@ -4,9 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardStateService } from './../../_services/auth-guard-state.service';
 
 import { DeathComponent } from './death.component';
+import { DeathCreateComponent } from './death-create/death-create.component';
+import { DeathEditorComponent } from './death-editor/death-editor.component';
 
 const routes: Routes = [
-  { path: '', component: DeathComponent , data: {animation:'death'}, canActivate:[AuthGuardStateService] }
+  { path: '', component: DeathComponent , data: {animation:'death'}, canActivate:[AuthGuardStateService] },
+  { path: 'create', component: DeathCreateComponent , data: {animation:'create'}, canActivate:[AuthGuardStateService] },
+  { path: 'detail/:id', component: DeathEditorComponent , data: {animation:'death/detail'}, canActivate:[AuthGuardStateService] }
+
 ];
 
 @NgModule({

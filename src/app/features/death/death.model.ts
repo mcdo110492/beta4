@@ -13,7 +13,8 @@ export class Death {
   book_no               : number;
   page_no               : number;
   entry_no              : number;
-  minister              : Minister;
+  minister_id           : number;
+  minister?              : Minister;
   created_at?           : Date;
   updated_at?           : Date;
 }
