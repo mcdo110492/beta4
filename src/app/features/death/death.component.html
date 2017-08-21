@@ -3,7 +3,7 @@
       <md-card-header fxLayout fxflex>
         <md-card-title fxFlex class="card-title">Death List</md-card-title>
         <div fxFlex></div>
-        <button md-raised-button class="card-button" color="accent" fxFlexAlign="end">Add New Record</button>
+        <button md-raised-button class="card-button" color="accent" fxFlexAlign="end" routerLink="create" >Add New Record</button>
       </md-card-header>
       <md-card-content>
         
@@ -63,6 +63,13 @@
             <ng-container cdkColumnDef="minister">
               <md-header-cell *cdkHeaderCellDef>Minister</md-header-cell>
               <md-cell *cdkCellDef="let row" >{{row.minister.minister_name}}</md-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="action">
+              <md-header-cell *cdkHeaderCellDef>Action</md-header-cell>
+              <md-cell *cdkCellDef="let row" >
+                <button md-raised-button color="accent" mdTooltip="View and Update Details" mdTooltipPosition="above" routerLink="detail/{{row.death_id}}">VIEW</button>
+              </md-cell>
             </ng-container>
 
             <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>

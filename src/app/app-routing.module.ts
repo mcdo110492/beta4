@@ -18,7 +18,7 @@ const routes: Routes = [
      { path: 'baptism', loadChildren: 'app/features/baptism/baptism.module#BaptismModule', canLoad:[AuthGuardStateService] },
      { path: 'confirmation', loadChildren: 'app/features/confirmation/confirmation.module#ConfirmationModule', canLoad:[AuthGuardStateService] },
      { path: 'death', loadChildren: 'app/features/death/death.module#DeathModule', canLoad:[AuthGuardStateService] },
-     { path: 'priest', loadChildren: 'app/features/priest/priest.module#PriestModule', canLoad:[AuthGuardStateService] },
+     { path: 'marriage', loadChildren: 'app/features/marriage/marriage.module#MarriageModule', canLoad:[AuthGuardStateService] },
      { path: 'minister', loadChildren: 'app/features/minister/minister.module#MinisterModule', canLoad:[AuthGuardStateService] },
    ]
  },

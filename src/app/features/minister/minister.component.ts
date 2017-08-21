@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 
 import { MdPaginator , MdSort } from '@angular/material';
@@ -15,6 +16,7 @@ import { Minister } from './minister.model';
 
 import { TableDataSourceService } from './../../_services/table-data-source.service';
 import { TableDatabaseService } from './../../_services/table-database.service';
+import { ToasterService } from './../../_services/toaster.service';
 import { ErrorHandlerService } from './../../_services/error-handler.service';
 
 @Component({
@@ -31,7 +33,7 @@ export class MinisterComponent implements OnInit, OnDestroy {
   latestSearchFilter = new Subject<string>();
 
   // Table Options
-  displayedColumns = ['minister_name', 'minister_id'];
+  displayedColumns = ['minister_name' ,'status','action'];
   dataSource : TableDataSourceService | null;
   
 
@@ -41,7 +43,10 @@ export class MinisterComponent implements OnInit, OnDestroy {
   pageSize : number = 5;
   pageIndex : number = 0;  
   
-  constructor(private _ministerService : MinisterService,private _tableDatabaseService : TableDatabaseService ,private _errHandler : ErrorHandlerService){}
+  constructor(private _ministerService : MinisterService,
+              private _tableDatabaseService : TableDatabaseService ,
+              private _errHandler : ErrorHandlerService,
+              private _toaster : ToasterService){}
 
   ngOnInit() {
 
@@ -51,6 +56,7 @@ export class MinisterComponent implements OnInit, OnDestroy {
 
     this.latestSearchFilter
         .debounceTime(300)
+        .distinctUntilChanged()
         .switchMap( search => this._ministerService.getDataSource(this.paginator,this.sort,search) )
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
@@ -91,6 +97,19 @@ export class MinisterComponent implements OnInit, OnDestroy {
   newSearchFilter(term) {
     this.latestSearchFilter.next(term);
   }
+
+  changeStatus(id : number , status : number){
+    
+      this._ministerService
+          .changeStatus(id,status)
+          .subscribe( (res) => {
+            if(res.status == 200){
+              this._toaster.showSuccess();
+              this.tableChangeEvent();
+            }
+          },
+          (err) => { this._errHandler.errorHandler(err); } )
+  } 
 
 
   
