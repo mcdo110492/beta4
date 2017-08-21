@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 
 import { MdPaginator , MdSort } from '@angular/material';
@@ -52,6 +53,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
 
     this.latestSearchFilter
         .debounceTime(300)
+        .distinctUntilChanged()
         .switchMap( search => this._confirmationService.getDataSource(this.paginator,this.sort,search) )
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);

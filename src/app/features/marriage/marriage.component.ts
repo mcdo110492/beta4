@@ -1,5 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-
+import { Component, OnInit, OnDestroy ,ViewChild } from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
@@ -9,31 +8,33 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 import { MdPaginator , MdSort } from '@angular/material';
 
-import { MinisterService } from './minister.service';
+import { Marriage } from './marriage.model';
 
-import { Minister } from './minister.model';
-
+import { MarriageService } from './marriage.service';
 
 import { TableDataSourceService } from './../../_services/table-data-source.service';
 import { TableDatabaseService } from './../../_services/table-database.service';
-import { ToasterService } from './../../_services/toaster.service';
+import { ProgressDialogService } from './../../_services/progress-dialog.service'; 
 import { ErrorHandlerService } from './../../_services/error-handler.service';
 
+
 @Component({
-  selector: 'app-minister',
-  templateUrl: './minister.component.html'
+  selector: 'app-marriage',
+  templateUrl: './marriage.component.html',
+  styleUrls: ['./marriage.component.scss']
 })
-export class MinisterComponent implements OnInit, OnDestroy {
+export class MarriageComponent implements OnInit, OnDestroy {
 
   // Child Elements variables Angular Material 2 Paginator and Sort
   @ViewChild( MdSort ) sort: MdSort;
   @ViewChild( MdPaginator ) paginator: MdPaginator;
 
+
   searchFilter : string = '';
   latestSearchFilter = new Subject<string>();
 
   // Table Options
-  displayedColumns = ['minister_name' ,'status','action'];
+  displayedColumns = ['husband_name', 'wife_name', 'date_married' ,'book_no', 'page_no', 'entry_no','minister','action'];
   dataSource : TableDataSourceService | null;
   
 
@@ -43,12 +44,14 @@ export class MinisterComponent implements OnInit, OnDestroy {
   pageSize : number = 5;
   pageIndex : number = 0;  
   
-  constructor(private _ministerService : MinisterService,
+  constructor(private _marriageService : MarriageService,
               private _tableDatabaseService : TableDatabaseService ,
-              private _errHandler : ErrorHandlerService,
-              private _toaster : ToasterService){}
+              private _errHandler : ErrorHandlerService, 
+              private _loader : ProgressDialogService){}
 
   ngOnInit() {
+
+    
 
     this.initData();
 
@@ -57,26 +60,40 @@ export class MinisterComponent implements OnInit, OnDestroy {
     this.latestSearchFilter
         .debounceTime(300)
         .distinctUntilChanged()
-        .switchMap( search => this._ministerService.getDataSource(this.paginator,this.sort,search) )
+        .switchMap( search => this._marriageService.getDataSource(this.paginator,this.sort,search) )
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
-        });
+        },
+        (err) => this._errHandler.errorHandler(err)
+        );
   }
 
   //Load Initial Data 
   initData(){
 
+    this._loader.openSpinner();
     //Override Inittial Paginator Default Values
     const initPaginator = {
       pageSize    : this.pageSize,
       pageIndex   : this.pageIndex,
     };
 
-    this._ministerService.getDataSource(initPaginator,this.sort,this.searchFilter)
+
+     this._marriageService.getDataSource(initPaginator,this.sort,this.searchFilter)
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
             this.pageDataLength = response.count;
-        });
+            this._loader.closeSpinner();
+        },
+        (err) => { this._errHandler.errorHandler(err); this._loader.closeSpinner(); }
+      );
+
+
+
+  }
+
+  tableTrackBy = (index : number, item: Marriage) => {
+    return item.marriage_id;
   }
 
 
@@ -88,28 +105,10 @@ export class MinisterComponent implements OnInit, OnDestroy {
 
   }
 
-  //Track By Method of the Angular Material Data Table
-  tableTrackBy = (index : number, item: Minister) => {
-    return item.minister_id;
-  }
-
   //Method in Every new Filter
   newSearchFilter(term) {
     this.latestSearchFilter.next(term);
   }
-
-  changeStatus(id : number , status : number){
-    
-      this._ministerService
-          .changeStatus(id,status)
-          .subscribe( (res) => {
-            if(res.status == 200){
-              this._toaster.showSuccess();
-              this.tableChangeEvent();
-            }
-          },
-          (err) => { this._errHandler.errorHandler(err); } )
-  } 
 
 
   
