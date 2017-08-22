@@ -5,11 +5,13 @@ import { AuthGuardStateService } from './../../_services/auth-guard-state.servic
 import { BaptismComponent } from './baptism.component';
 import { BaptismCreateComponent } from './baptism-create/baptism-create.component';
 import { BaptismEditorComponent } from './baptism-editor/baptism-editor.component';
+import { BaptismBulkComponent } from './baptism-bulk/baptism-bulk.component';
 
 const routes: Routes = [
   { path: '', component: BaptismComponent, data: {animation:'baptism'}, canActivate:[AuthGuardStateService] },
   { path: 'create', component: BaptismCreateComponent, data: {animation:'baptism/create'}, canActivate:[AuthGuardStateService] },
   { path: 'detail/:id', component: BaptismEditorComponent, data: {animation:'baptism/detail'}, canActivate:[AuthGuardStateService] },
+  { path: 'bulk', component: BaptismBulkComponent, data: {animation:'baptism/bulk'}, canActivate:[AuthGuardStateService] },
 ];
 
 @NgModule({

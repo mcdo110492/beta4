@@ -4,7 +4,6 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 
 import { MdPaginator , MdSort } from '@angular/material';
@@ -17,6 +16,7 @@ import { Confirmation } from './confirmation.model';
 import { TableDataSourceService } from './../../_services/table-data-source.service';
 import { TableDatabaseService } from './../../_services/table-database.service';
 import { ErrorHandlerService } from './../../_services/error-handler.service';
+import { ProgressDialogService } from './../../_services/progress-dialog.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -43,7 +43,10 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
   pageSize : number = 5;
   pageIndex : number = 0;  
   
-  constructor(private _confirmationService : ConfirmationService,private _tableDatabaseService : TableDatabaseService ,private _errHandler : ErrorHandlerService){}
+  constructor(private _confirmationService : ConfirmationService,
+              private _tableDatabaseService : TableDatabaseService ,
+              private _errHandler : ErrorHandlerService,
+              private _loader : ProgressDialogService){}
 
   ngOnInit() {
 
@@ -53,11 +56,11 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
 
     this.latestSearchFilter
         .debounceTime(300)
-        .distinctUntilChanged()
         .switchMap( search => this._confirmationService.getDataSource(this.paginator,this.sort,search) )
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
-        });
+        },
+        (err) => { this._errHandler.errorHandler(err); });
   }
 
   //Load Initial Data 
@@ -69,11 +72,15 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
       pageIndex   : this.pageIndex,
     };
 
+    this._loader.openSpinner(); // Dialog Progress Spinner
+
     this._confirmationService.getDataSource(initPaginator,this.sort,this.searchFilter)
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
             this.pageDataLength = response.count;
-        });
+        },
+        (err) => { this._errHandler.errorHandler(err); this._loader.closeSpinner(); },
+        () => this._loader.closeSpinner() );
   }
 
 

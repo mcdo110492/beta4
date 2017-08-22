@@ -4,7 +4,6 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 
 import { MdPaginator , MdSort } from '@angular/material';
@@ -18,6 +17,7 @@ import { TableDataSourceService } from './../../_services/table-data-source.serv
 import { TableDatabaseService } from './../../_services/table-database.service';
 import { ToasterService } from './../../_services/toaster.service';
 import { ErrorHandlerService } from './../../_services/error-handler.service';
+import { ProgressDialogService } from './../../_services/progress-dialog.service';
 
 @Component({
   selector: 'app-minister',
@@ -46,7 +46,8 @@ export class MinisterComponent implements OnInit, OnDestroy {
   constructor(private _ministerService : MinisterService,
               private _tableDatabaseService : TableDatabaseService ,
               private _errHandler : ErrorHandlerService,
-              private _toaster : ToasterService){}
+              private _toaster : ToasterService,
+              private _loader : ProgressDialogService){}
 
   ngOnInit() {
 
@@ -56,11 +57,11 @@ export class MinisterComponent implements OnInit, OnDestroy {
 
     this.latestSearchFilter
         .debounceTime(300)
-        .distinctUntilChanged()
         .switchMap( search => this._ministerService.getDataSource(this.paginator,this.sort,search) )
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
-        });
+        },
+        (err) => { this._errHandler.errorHandler(err); } );
   }
 
   //Load Initial Data 
@@ -72,11 +73,15 @@ export class MinisterComponent implements OnInit, OnDestroy {
       pageIndex   : this.pageIndex,
     };
 
+    this._loader.openSpinner(); //Dialog Progress Spinner
+
     this._ministerService.getDataSource(initPaginator,this.sort,this.searchFilter)
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
             this.pageDataLength = response.count;
-        });
+        },
+        (err) => { this._errHandler.errorHandler(err); this._loader.closeSpinner(); },
+        () => this._loader.closeSpinner() );
   }
 
 
@@ -88,10 +93,6 @@ export class MinisterComponent implements OnInit, OnDestroy {
 
   }
 
-  //Track By Method of the Angular Material Data Table
-  tableTrackBy = (index : number, item: Minister) => {
-    return item.minister_id;
-  }
 
   //Method in Every new Filter
   newSearchFilter(term) {

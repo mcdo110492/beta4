@@ -3,7 +3,6 @@ import { Component, OnInit, OnDestroy ,ViewChild } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 
 import { MdPaginator , MdSort } from '@angular/material';
@@ -30,6 +29,8 @@ export class BaptismComponent implements OnInit, OnDestroy {
   // Child Elements variables Angular Material 2 Paginator and Sort
   @ViewChild( MdSort ) sort: MdSort;
   @ViewChild( MdPaginator ) paginator: MdPaginator;
+
+
 
 
   searchFilter : string = '';
@@ -61,7 +62,6 @@ export class BaptismComponent implements OnInit, OnDestroy {
 
     this.latestSearchFilter
         .debounceTime(300)
-        .distinctUntilChanged()
         .switchMap( search => this._baptismService.getDataSource(this.paginator,this.sort,search) )
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
@@ -73,21 +73,25 @@ export class BaptismComponent implements OnInit, OnDestroy {
   //Load Initial Data 
   initData(){
 
-    this._loader.openSpinner();
+   
+
     //Override Inittial Paginator Default Values
     const initPaginator = {
       pageSize    : this.pageSize,
       pageIndex   : this.pageIndex,
     };
 
+    this._loader.openSpinner(); // Dialog Progress Spinner
+
 
      this._baptismService.getDataSource(initPaginator,this.sort,this.searchFilter)
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
             this.pageDataLength = response.count;
-            this._loader.closeSpinner();
+            
         },
-        (err) => { this._errHandler.errorHandler(err); this._loader.closeSpinner(); }
+        (err) => { this._errHandler.errorHandler(err); this._loader.closeSpinner(); },
+        () => this._loader.closeSpinner()
       );
 
 

@@ -5,11 +5,13 @@ import { AuthGuardStateService } from './../../_services/auth-guard-state.servic
 import { MarriageComponent } from './marriage.component';
 import { MarriageEditorComponent } from './marriage-editor/marriage-editor.component';
 import { MarriageCreateComponent } from './marriage-create/marriage-create.component';
+import { MarriageBulkComponent } from './marriage-bulk/marriage-bulk.component';
 
 const routes: Routes = [
-  { path: '', component: MarriageComponent, data: { animations:'marriage' }, canActivate:[AuthGuardStateService] },
-  { path: 'create', component: MarriageCreateComponent, data: { animations:'marriage/create' }, canActivate:[AuthGuardStateService] },
-  { path: 'detail/:id', component: MarriageEditorComponent, data: { animations:'marriage/detail' }, canActivate:[AuthGuardStateService] },
+  { path: '', component: MarriageComponent, data: { animation:'marriage' }, canActivate:[AuthGuardStateService] },
+  { path: 'create', component: MarriageCreateComponent, data: { animation:'marriage/create' }, canActivate:[AuthGuardStateService] },
+  { path: 'detail/:id', component: MarriageEditorComponent, data: { animation:'marriage/detail' }, canActivate:[AuthGuardStateService] },
+  { path: 'bulk', component: MarriageBulkComponent, data: { animation:'marriage/bulk' }, canActivate:[AuthGuardStateService] },
 ];
 
 @NgModule({
