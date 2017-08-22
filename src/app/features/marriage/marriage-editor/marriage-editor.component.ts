@@ -44,4 +44,5 @@ export class MarriageEditorComponent implements OnInit {
                   },
                   (err) => { this._errHandle.errorHandler(err); this._loader.closeSpinner(); });
 
+    }
 }
