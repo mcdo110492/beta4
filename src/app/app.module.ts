@@ -46,6 +46,6 @@ import { ProgressDialogComponent } from './main/progress-dialog/progress-dialog.
     AppRoutingModule,
     ToastModule.forRoot()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

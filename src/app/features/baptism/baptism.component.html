@@ -6,6 +6,7 @@
         <md-card-title fxFlex class="card-title">Baptism List</md-card-title>
         <div fxFlex></div>
         <button md-raised-button class="card-button" color="accent" routerLink="create" fxFlexAlign="end">Add New Record</button>
+        <button md-raised-button class="card-button" color="primary" routerLink="bulk" fxFlexAlign="end">Add Bulk Record</button>
       </md-card-header>
       <md-card-content>
         
@@ -20,7 +21,7 @@
               </md-input-container>
         </div>
   <div class="table-content">
-        <md-table   #table [dataSource]="dataSource" mdSort (mdSortChange)="tableChangeEvent()" [trackBy]="tableTrackBy" >
+        <md-table   #table [dataSource]="dataSource" mdSort (mdSortChange)="tableChangeEvent()"  >
 
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
@@ -74,7 +75,7 @@
         </md-table>
   </div>
 
-    <md-paginator #paginator
+    <md-paginator
                 [length]="pageDataLength"
                 [pageIndex]="pageIndex"
                 [pageSize]="pageSize"

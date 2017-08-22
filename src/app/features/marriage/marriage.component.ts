@@ -3,7 +3,6 @@ import { Component, OnInit, OnDestroy ,ViewChild } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 
 import { MdPaginator , MdSort } from '@angular/material';
@@ -59,7 +58,6 @@ export class MarriageComponent implements OnInit, OnDestroy {
 
     this.latestSearchFilter
         .debounceTime(300)
-        .distinctUntilChanged()
         .switchMap( search => this._marriageService.getDataSource(this.paginator,this.sort,search) )
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
@@ -83,9 +81,10 @@ export class MarriageComponent implements OnInit, OnDestroy {
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
             this.pageDataLength = response.count;
-            this._loader.closeSpinner();
+            
         },
-        (err) => { this._errHandler.errorHandler(err); this._loader.closeSpinner(); }
+        (err) => { this._errHandler.errorHandler(err); this._loader.closeSpinner(); },
+        () => this._loader.closeSpinner()
       );
 
 
