@@ -4,7 +4,6 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
 
-
 import { MdPaginator , MdSort } from '@angular/material';
 
 import { Baptism } from './baptism.model';
@@ -15,7 +14,6 @@ import { TableDataSourceService } from './../../_services/table-data-source.serv
 import { TableDatabaseService } from './../../_services/table-database.service';
 import { ProgressDialogService } from './../../_services/progress-dialog.service'; 
 import { ErrorHandlerService } from './../../_services/error-handler.service';
-
 
 
 
@@ -117,10 +115,12 @@ export class BaptismComponent implements OnInit, OnDestroy {
   }
 
 
+
   
   ngOnDestroy(){
     this.latestSearchFilter.unsubscribe();
   }
+
  
 }
 

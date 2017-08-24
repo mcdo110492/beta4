@@ -1,16 +1,5 @@
 
-    <md-card>
-      <md-card-header fxLayout fxflex>
-        <md-card-title fxFlex class="card-title">Death List</md-card-title>
-        <div fxFlex></div>
-        <button md-raised-button class="card-button" color="accent" fxFlexAlign="end" routerLink="create" >Add New Record</button>
-        <button md-raised-button class="card-button" color="primary" fxFlexAlign="end" routerLink="bulk" >Add Bulk Record</button>
-      </md-card-header>
-      <md-card-content>
-        
-                  
-      </md-card-content>
-    </md-card>
+<app-title-bar [title]="'Death List'" [bulk]="true" ></app-title-bar>
 
 <div class="card-content-container mat-elevation-z8">
   <div class="card-header">
@@ -70,6 +59,7 @@
               <md-header-cell *cdkHeaderCellDef>Action</md-header-cell>
               <md-cell *cdkCellDef="let row" >
                 <button md-raised-button color="accent" mdTooltip="View and Update Details" mdTooltipPosition="above" routerLink="detail/{{row.death_id}}">VIEW</button>
+                <button md-raised-button color="warn" mdTooltip="Print Details" mdTooltipPosition="above" routerLink="print/{{row.death_id}}">PRINT</button>
               </md-cell>
             </ng-container>
 

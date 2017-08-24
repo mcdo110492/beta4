@@ -1,18 +1,7 @@
 
 
 
-    <md-card>
-      <md-card-header fxLayout fxflex>
-        <md-card-title fxFlex class="card-title">Baptism List</md-card-title>
-        <div fxFlex></div>
-        <button md-raised-button class="card-button" color="accent" routerLink="create" fxFlexAlign="end">Add New Record</button>
-        <button md-raised-button class="card-button" color="primary" routerLink="bulk" fxFlexAlign="end">Add Bulk Record</button>
-      </md-card-header>
-      <md-card-content>
-        
-                  
-      </md-card-content>
-    </md-card>
+<app-title-bar [title]="'Baptism List'" [bulk]="true" ></app-title-bar>
 
 <div class="card-content-container mat-elevation-z8">
   <div class="card-header">
@@ -20,8 +9,8 @@
                 <input type="search" mdInput [(ngModel)]="searchFilter" (ngModelChange)="newSearchFilter(searchFilter)" placeholder="Search Child Name" >
               </md-input-container>
         </div>
-  <div class="table-content">
-        <md-table   #table [dataSource]="dataSource" mdSort (mdSortChange)="tableChangeEvent()"  >
+  <div class="table-content" >
+        <md-table   #table [dataSource]="dataSource" mdSort (mdSortChange)="tableChangeEvent()" >
 
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
@@ -67,6 +56,7 @@
               <md-header-cell *cdkHeaderCellDef>Action</md-header-cell>
               <md-cell *cdkCellDef="let row" >
                 <button md-raised-button color="accent" mdTooltip="View and Update Details" mdTooltipPosition="above" routerLink="detail/{{row.baptism_id}}">VIEW</button>
+                <button md-raised-button color="warn" mdTooltip="Print Details" mdTooltipPosition="above" routerLink="print/{{row.baptism_id}}">PRINT</button>
               </md-cell>
             </ng-container>
 

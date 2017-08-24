@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 
 import { Subscription } from 'rxjs/Subscription';
@@ -14,36 +14,33 @@ import { slideInDownAnimation } from './../_animations/slide.animation';
   animations:[slideInDownAnimation]
 })
 
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
 
   mediaWatcher : Subscription;
   sideNavOpen: boolean;
-  sideNavMode:string;
+  sideNavMode: string;
   
 
  
 
-  constructor(public media:ObservableMedia) {}
+  constructor(private media:ObservableMedia) {
+
+      this.mediaWatcher = this.media.subscribe((change:MediaChange) => {
+        setTimeout(() => {
+          if ( change.mqAlias === 'xs') {
+            this.loadMobileContent();
+          }
+          else{
+            this.loadOriginalContent();
+          }
+        },0);
+      });
+  }
 
   ngOnInit() {
 
-     setTimeout(() => {
-      this.mediaWatcher = this.media.subscribe((change:MediaChange) => {
-        if(change.mqAlias === 'xs' || change.mqAlias === 'sm')
-          {
-            this.sideNavOpen = false;
-            this.sideNavMode = 'over';
-          }
-          else{
-            this.sideNavOpen = true;
-            this.sideNavMode = 'side';
-          }
-      });
-    },0);
-
-   
-   
   }
+  
 
 
   isOpenSideNav(){
@@ -57,6 +54,20 @@ export class MainComponent implements OnInit {
 
     return outlet.activatedRouteData['animation'];
 
+  }
+
+  loadOriginalContent(){
+    this.sideNavOpen = true;
+    this.sideNavMode = 'side';
+  }
+
+  loadMobileContent(){
+    this.sideNavOpen = false;
+    this.sideNavMode = 'over';
+  }
+
+  ngOnDestroy(){
+    this.mediaWatcher.unsubscribe();
   }
 
 

@@ -23,4 +23,9 @@ export class MasterDataService {
                     .get<IMinisterDataResponse>(`${this.baseUrl}/minister/all`);
   }
 
+  getActiveMinister() {
+    return this._http
+                    .get<IMinisterDataResponse>(`${this.baseUrl}/minister/active`);
+  }
+
 }

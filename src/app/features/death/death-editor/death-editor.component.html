@@ -1,17 +1,6 @@
 
 
-
-    <md-card>
-      <md-card-header fxLayout fxflex>
-        <md-card-title fxFlex class="card-title">Death Certificate Details</md-card-title>
-        <div fxFlex></div>
-      </md-card-header>
-      <md-card-content>
-        
-                  
-      </md-card-content>
-    </md-card>
-  
+  <app-title-bar [title]="'Death Certificate Details'" [goBack]="'/main/death'" [toolTip]="'Go Back to Death List'" ></app-title-bar>  
     
     <!-- Start Form Component Here -->
     <div *ngIf="death">

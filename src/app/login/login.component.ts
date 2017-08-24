@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
                       role  : res.role
                     };
 
+                    
                     localStorage.setItem('presence',JSON.stringify(userStatus));
                     localStorage.setItem('profileName',res.profileName);
                     localStorage.setItem('profilePic',res.profilePic);
@@ -70,26 +71,35 @@ export class LoginComponent implements OnInit {
 
 
   checkLoginStatus() {
-    const obj = JSON.parse(localStorage.presence || null);
+    try {
 
-          if(obj){
-            if(obj.token){
-              switch (obj.role) {
-                case 1:
-                  this._router.navigateByUrl('/main/baptism');
-                  break;
-                case 2:
-                  this._router.navigateByUrl('/main/baptism');
-                  break;
-                
-                case 3:
-                  this._router.navigateByUrl('/main/pos');
-                  break;
-            
-              }
-            }
-            
-          }
+      const obj = JSON.parse(localStorage.presence || null);
+      
+                if(obj){
+                  if(obj.token){
+                    switch (obj.role) {
+                      case 1:
+                        this._router.navigateByUrl('/main/baptism');
+                        break;
+                      case 2:
+                        this._router.navigateByUrl('/main/baptism');
+                        break;
+                      
+                      case 3:
+                        this._router.navigateByUrl('/main/pos');
+                        break;
+                  
+                    }
+                  }
+                  
+                }
+      
+    } catch (error) {
+      localStorage.clear();
+      console.log('Unable to parse Token');
+
+    }
+    
   
   }
 
