@@ -29,6 +29,9 @@ import { TableDatabaseService } from './../_services/table-database.service';
 //Master Data Services that will be shared in the entire App
 import { MasterDataService } from './../_services/master-data.service';
 
+//PDF Services by jspdf and html2pdf
+import { PdfService } from './../_services/pdf.service';
+
 
 @NgModule({
   imports: [
@@ -45,7 +48,8 @@ import { MasterDataService } from './../_services/master-data.service';
     TableDatabaseService,
     ToasterService,
     { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptor, multi: true },
-    MasterDataService
+    MasterDataService,
+    PdfService
   ],
 })
 

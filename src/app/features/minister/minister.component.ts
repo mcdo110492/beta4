@@ -21,7 +21,8 @@ import { ProgressDialogService } from './../../_services/progress-dialog.service
 
 @Component({
   selector: 'app-minister',
-  templateUrl: './minister.component.html'
+  templateUrl: './minister.component.html',
+  styleUrls: ['./minister.component.scss']
 })
 export class MinisterComponent implements OnInit, OnDestroy {
 
@@ -88,7 +89,6 @@ export class MinisterComponent implements OnInit, OnDestroy {
 
   //Method that captures the Angular Material 2 Paginator Event and Sort Event
   tableChangeEvent(){
-
     this.latestSearchFilter.next(this.searchFilter);
 
   }

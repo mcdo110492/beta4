@@ -46,6 +46,7 @@ export class AuthGuardStateService implements CanActivate, CanActivateChild, Can
 
     authValidity.subscribe( res => {
       if(!res){
+        localStorage.clear();
         this._router.navigateByUrl('/login');
       }
       isValid.next(res);
