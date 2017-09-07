@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
 
   userProfileName : string = localStorage.profileName;
-  userProfilePic  : string = `/assets/${localStorage.profilePic}`;
+  userProfilePic  : string = `assets/${localStorage.profilePic}`;
 
   // Emit The Event to the Parent
   @Output() onSideNavIsOpen = new EventEmitter <boolean> ();

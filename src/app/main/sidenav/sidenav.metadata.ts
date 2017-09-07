@@ -14,6 +14,17 @@ export const superAdminMetaData = [
         { title : 'marriage', routeUrl : 'marriage', icon :'view_list' }
       ] 
     }
+    ,
+    { isHeader : true, header : 'accounting' , 
+      list :[
+        { title : 'item type', routeUrl : 'item/type' ,icon :'format_list_bulleted' },
+        { title : 'item price', routeUrl : 'item/price' ,icon :'format_list_bulleted' },
+        { title : 'group', routeUrl : 'group' ,icon :'format_list_bulleted' },
+        { title : 'pos', routeUrl : 'pos' ,icon :'monetization_on' },
+        { title : 'invoices', routeUrl : 'invoices' ,icon :'receipt' },
+        { title : 'invoice reports', routeUrl : 'invoice/reports' ,icon :'library_books' }
+      ] 
+    }
 ];
 
 export const recordMetaData = [

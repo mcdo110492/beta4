@@ -37,6 +37,7 @@ import {
   MdSortModule,
   MdPaginatorModule
 } from '@angular/material';
+import { UniqueValidatorDirective } from './unique-validator.directive';
 
 
 const AngularMaterialModules: any[] = [
@@ -76,14 +77,15 @@ const AngularMaterialModules: any[] = [
   imports: [
     CommonModule
   ],
-  declarations: [],
+  declarations: [UniqueValidatorDirective],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     CdkTableModule,
     AngularMaterialModules,
-    FlexLayoutModule
+    FlexLayoutModule,
+    UniqueValidatorDirective
   ]
 })
 export class SharedModule { }

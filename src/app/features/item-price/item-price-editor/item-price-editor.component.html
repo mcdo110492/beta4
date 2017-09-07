@@ -1,0 +1,15 @@
+
+
+
+ 
+  <app-title-bar [title]="'Item Type Price Details'" [goBack]="'/main/item/price'" [toolTip]="'Go Back to Item Type Price List'" ></app-title-bar> 
+  
+  <!-- Start Form Component Here -->
+  <div *ngIf="itemPrice">
+  <app-item-price-form [itemPrice]="itemPrice" ></app-item-price-form>
+  </div>
+  <!-- End Form Component Here -->
+
+
+
+

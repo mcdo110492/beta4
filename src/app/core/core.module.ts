@@ -9,6 +9,8 @@ import { ToolbarLoadingIndicatorService } from './../_services/toolbar-loading-i
 
 // Angular Material Dialog Service with Md Spinner to open and close the loader spinner
 import { ProgressDialogService } from './../_services/progress-dialog.service';
+// Angular Material Dialog Service for Confirmation Dialog with dyanmic data content
+import { ConfirmDialogService } from './../_services/confirm-dialog.service';
 
 //Route Authentication Guard and Authetication Login
 import { AuthGuardStateService } from './../_services/auth-guard-state.service';
@@ -32,6 +34,12 @@ import { MasterDataService } from './../_services/master-data.service';
 //PDF Services by jspdf and html2pdf
 import { PdfService } from './../_services/pdf.service';
 
+//Print Receipt Services by jspdf and html2pdf
+import { PrintReceiptDialogService } from './../_services/print-receipt-dialog.service';
+
+//Print Receipt Services by jspdf and html2pdf
+import { NumberToWordsService } from './../_services/number-to-words.service';
+
 
 @NgModule({
   imports: [
@@ -41,6 +49,7 @@ import { PdfService } from './../_services/pdf.service';
   providers: [
     ToolbarLoadingIndicatorService,
     ProgressDialogService,
+    ConfirmDialogService,
     AuthGuardStateService,
     AuthenticationService, 
     ErrorHandlerService,
@@ -49,7 +58,9 @@ import { PdfService } from './../_services/pdf.service';
     ToasterService,
     { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptor, multi: true },
     MasterDataService,
-    PdfService
+    PdfService,
+    PrintReceiptDialogService,
+    NumberToWordsService
   ],
 })
 

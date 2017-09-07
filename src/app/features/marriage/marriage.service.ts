@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Marriage } from './marriage.model';
 
-import { environment } from './../../../environments/environment';
+import { environment } from './../../../environments/environment.prod';
 
 interface  IDataResponse {
   count : number;

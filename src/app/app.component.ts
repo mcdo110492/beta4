@@ -23,9 +23,9 @@ export class AppComponent implements OnInit {
   routerIndicator;
   isLoaderShow: boolean;
 
-  constructor(public toolbarLoadingIndicatorService : ToolbarLoadingIndicatorService,
-              public router: Router,
-              public toaster : ToastsManager,
+  constructor(private toolbarLoadingIndicatorService : ToolbarLoadingIndicatorService,
+              private router: Router,
+              private toaster : ToastsManager,
               vRef : ViewContainerRef ){
                 toaster.setRootViewContainerRef(vRef);
                }

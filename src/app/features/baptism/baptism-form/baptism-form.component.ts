@@ -148,7 +148,6 @@ export class BaptismFormComponent implements OnInit, OnChanges, OnDestroy {
     this.baptismForm.patchValue({
       baptism_id : 0
     });
-    console.log(this.baptismForm.value);
   }
 
   ngOnDestroy(){

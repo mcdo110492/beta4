@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpRequest } from '@angular/common/http';
 
-import { environment } from './../../../environments/environment';
+import { environment } from './../../../environments/environment.prod';
 
 @Injectable()
 export class FileUploadService {

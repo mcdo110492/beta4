@@ -22,6 +22,9 @@ import { AppComponent } from './app.component';
 //Core Module for the Global Services
 import { CoreModule } from './core/core.module';
 import { ProgressDialogComponent } from './main/progress-dialog/progress-dialog.component';
+import { ConfirmDialogComponent } from './main/confirm-dialog/confirm-dialog.component';
+import { PrintReceiptDialogComponent } from './main/print-receipt-dialog/print-receipt-dialog.component';
+
 
 
 
@@ -31,10 +34,14 @@ import { ProgressDialogComponent } from './main/progress-dialog/progress-dialog.
   declarations: [
     AppComponent,
     PrimaryRouteComponents,
-    ProgressDialogComponent
+    ProgressDialogComponent,
+    ConfirmDialogComponent,
+    PrintReceiptDialogComponent
   ],
   entryComponents:[
-    ProgressDialogComponent
+    ProgressDialogComponent,
+    ConfirmDialogComponent,
+    PrintReceiptDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     this._authService
                 .authenticateCredentials(this.loginForm.value)
                 .subscribe( (res) => {
-                  this._loader.closeSpinner();
+                  
                   if(res.status == 200){
                     const userStatus = {
                       token : res.token,
@@ -58,7 +58,8 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('presence',JSON.stringify(userStatus));
                     localStorage.setItem('profileName',res.profileName);
                     localStorage.setItem('profilePic',res.profilePic);
-
+                    this._loader.closeSpinner();
+                    
                     this.checkLoginStatus();
                   }
                   else {

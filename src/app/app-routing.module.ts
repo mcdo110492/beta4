@@ -20,6 +20,12 @@ const routes: Routes = [
      { path: 'death', loadChildren: 'app/features/death/death.module#DeathModule', canLoad:[AuthGuardStateService] },
      { path: 'marriage', loadChildren: 'app/features/marriage/marriage.module#MarriageModule', canLoad:[AuthGuardStateService] },
      { path: 'minister', loadChildren: 'app/features/minister/minister.module#MinisterModule', canLoad:[AuthGuardStateService] },
+     { path: 'item/type', loadChildren: 'app/features/item-type/item-type.module#ItemTypeModule', canLoad:[AuthGuardStateService] },
+     { path: 'item/price', loadChildren: 'app/features/item-price/item-price.module#ItemPriceModule', canLoad:[AuthGuardStateService] },
+     { path: 'group', loadChildren: 'app/features/group/group.module#GroupModule', canLoad:[AuthGuardStateService] },
+     { path: 'pos', loadChildren: 'app/features/pos/pos.module#PosModule', canLoad:[AuthGuardStateService] },
+     { path: 'invoices', loadChildren: 'app/features/invoices/invoices.module#InvoicesModule', canLoad:[AuthGuardStateService] },
+     { path: 'invoice/reports', loadChildren: 'app/features/invoice-reports/invoice-reports.module#InvoiceReportsModule', canLoad:[AuthGuardStateService] },
    ]
  },
 ];

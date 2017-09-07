@@ -1,0 +1,34 @@
+<form [formGroup]="itemGroupForm" novalidate>
+    <md-card>
+      <md-card-content fxLayout="column" fxLayoutAlign="space-between center" fxFill>
+        
+        <div fxLayout="row" fxFill>
+  
+          <md-input-container fxFlex class="tricky-select">
+              <input type="text" mdInput style="display:none;">
+              <md-select fxFlex="66"  formControlName="itemPriceId" placeholder="Item Type Price" appUniqueValidator keyUrl="item/group/validate" keyId="{{groupId}}" required>
+                  <md-option *ngFor="let item of itemPrice"  [value]="item.itemPriceId">
+                      {{ item.itemName }} - {{ item.itemPrice | number:'1.2-2' }}
+                  </md-option>
+              </md-select>
+              <md-hint *ngIf="itemGroupForm.get('itemPriceId').hasError('required') && itemGroupForm.get('itemPriceId').touched" style="color:red;">
+                  Item Type is <strong>required</strong>
+              </md-hint>
+              <md-hint *ngIf="itemGroupForm.get('itemPriceId').hasError('asyncInvalid')" style="color:red;">
+                This Item is already been added to this <strong>group</strong>
+            </md-hint>
+          </md-input-container>
+            
+        </div>
+            
+      </md-card-content>
+  
+      <md-card-actions> 
+        <div fxLayout fxFill fxLayoutAlign="center center">
+          
+          <button md-raised-button [disabled]="itemGroupForm.get('itemPriceId').hasError('required') || itemGroupForm.get('itemPriceId').hasError('asyncInvalid')" (click)="saveForm()"  color="accent">Add Item</button>
+          
+        </div>
+      </md-card-actions> 
+    </md-card>
+  </form>

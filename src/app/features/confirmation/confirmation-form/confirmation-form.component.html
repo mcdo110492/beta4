@@ -17,7 +17,7 @@
                   <md-hint align="start"><strong>Click the Date Icon to select</strong> </md-hint>
                   <button mdSuffix [mdDatepickerToggle]="confDate"></button>
                   <md-error>
-                      Baptism Date is <strong>required</strong>
+                      Confirmation Date is <strong>required</strong>
                   </md-error>
                 </md-input-container>
                 <md-datepicker #confDate [startAt]="startDate"></md-datepicker>
@@ -55,6 +55,9 @@
               <input mdInput [mdDatepicker]="picker" placeholder="Baptism Date" formControlName="baptism_date" >
               <md-hint align="start"><strong>Click the Date Icon to select</strong> </md-hint>
               <button mdSuffix [mdDatepickerToggle]="picker"></button>
+              <md-error>
+                Baptism Date is <strong>required</strong>
+            </md-error>
             </md-input-container>
             <md-datepicker #picker [startAt]="startDate"></md-datepicker>
           </div>

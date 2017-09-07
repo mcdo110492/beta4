@@ -1,0 +1,45 @@
+<form [formGroup]="itemPriceForm" novalidate>
+  <md-card>
+    <md-card-content fxLayout="column" fxLayoutAlign="space-between center" fxFill>
+      
+      <div fxLayout="row" fxFill>
+
+        <md-input-container fxFlex class="tricky-select">
+            <input type="text" mdInput style="display:none;">
+            <md-select fxFlex="66"  formControlName="itemTypeId" placeholder="Item Type" required>
+                <md-option *ngFor="let item of itemType"  [value]="item.itemTypeId">
+                    {{ item.itemName }}
+                </md-option>
+            </md-select>
+            <md-hint *ngIf="itemPriceForm.get('itemTypeId').hasError('required') && itemPriceForm.get('itemTypeId').touched" style="color:red;">
+                Item Type is <strong>required</strong>
+            </md-hint>
+        </md-input-container>
+
+        <md-input-container fxFlex>
+          <span mdPrefix>PHP &nbsp;</span>
+          <input type="number" mdInput placeholder="Price" formControlName="itemPrice" required>
+          <md-error>
+            Price is <strong>required</strong>
+          </md-error>
+      </md-input-container>
+          
+      </div>
+
+      
+                
+    </md-card-content>
+
+    <md-card-actions> 
+      <div fxLayout fxFill fxLayoutAlign="center center">
+        
+        <button md-raised-button [disabled]="itemPriceForm.invalid || itemPriceForm.pristine" (click)="saveForm()"  color="accent">Save Changes</button>
+
+        <button md-raised-button *ngIf="itemPriceId.value != 0" [disabled]="itemPriceForm.pristine" (click)="revertForm()"  color="warn">Revert Changes</button>
+
+        <button md-raised-button *ngIf="itemPriceId.value == 0"   [disabled]="itemPriceForm.pristine" (click)="resetForm()"  color="warn">Reset</button>
+        
+      </div>
+    </md-card-actions> 
+  </md-card>
+</form>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TitleBarComponent } from './title-bar.component';
+import { PosFormComponent } from './pos-form.component';
 
-describe('TitleBarComponent', () => {
-  let component: TitleBarComponent;
-  let fixture: ComponentFixture<TitleBarComponent>;
+describe('PosFormComponent', () => {
+  let component: PosFormComponent;
+  let fixture: ComponentFixture<PosFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TitleBarComponent ]
+      declarations: [ PosFormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TitleBarComponent);
+    fixture = TestBed.createComponent(PosFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

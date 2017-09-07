@@ -36,7 +36,7 @@
             <td class="text-center"><u>CONTRACTED MARRIAGE IN OUR CHURCH WITH</u></td>
           </tr>
         </table>
-        <table width="104%">
+        <table width="88%">
           <tbody>
             <tr>
               <td>Wife</td>
@@ -78,13 +78,20 @@
               <td>Parish Seal</td>
               <td>: </td>
               <td></td>
-              <td *ngIf="activeMinister" class="text-center">{{activeMinister.minister_name}}</td>
+              <td></td>
+            </tr>
+           
+          </tbody>
+        </table>
+        <table width="100%">
+          <tbody>
+            <tr>
+                <td></td>
+                <td *ngIf="activeMinister" class="text-center minister-area">{{activeMinister.minister_name}}</td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td class="text-center">Parish Priest</td>
+                <td style="width:230px"></td>
+                <td class="text-center">Parish Priest</td>
             </tr>
           </tbody>
         </table>

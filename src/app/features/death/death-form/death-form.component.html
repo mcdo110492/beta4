@@ -17,7 +17,7 @@
                   <md-hint align="start"><strong>Click the Date Icon to select</strong> </md-hint>
                   <button mdSuffix [mdDatepickerToggle]="deathDate"></button>
                   <md-error>
-                      Baptism Date is <strong>required</strong>
+                      Date of Death is <strong>required</strong>
                   </md-error>
                 </md-input-container>
                 <md-datepicker #deathDate [startAt]="startDate"></md-datepicker>
@@ -51,6 +51,9 @@
               <input mdInput [mdDatepicker]="picker" placeholder="Date of Burial" formControlName="date_burial" >
               <md-hint align="start"><strong>Click the Date Icon to select</strong> </md-hint>
               <button mdSuffix [mdDatepickerToggle]="picker"></button>
+              <md-error>
+                Date of Burial is <strong>required</strong>
+              </md-error>
             </md-input-container>
             <md-datepicker #picker [startAt]="startDate"></md-datepicker>
           </div>

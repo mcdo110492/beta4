@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from './../../environments/environment.prod';
 
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/map';
 
-import { environment } from './../../environments/environment';
 
 interface Login {
   username : string;
@@ -32,22 +31,14 @@ export class AuthenticationService {
 
   constructor(private _http : HttpClient) { }
 
-  //The Authentication that connects to the backend and must return a boolean
-  checkValidity() : Observable<boolean>  {
+  //The Authentication that connects to the backend to check the validity of the user token
+  checkValidity()  {
 
-    let isAuthenticated  = new BehaviorSubject<boolean>(true);
-      this._http
+      return this._http
           .get(`${this.baseUrl}/authenticate`)
-          .subscribe( (isValid) => {
-              isAuthenticated.next(true);
-           },
-           (err) => {
-             isAuthenticated.next(false);
-             console.log(err);
-           }
-          );
-
-      return isAuthenticated.asObservable();
+          .map((res) => {
+            return res;
+          });
   }
 
 
