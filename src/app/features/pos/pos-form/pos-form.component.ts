@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { GroupItem } from './../../group/group-item/group-item.model';
+import { ServicesType } from './../../services-type/services-type.model';
 
 import { PosService } from './../pos.service';
 
@@ -13,12 +13,11 @@ import { PrintReceiptDialogService } from './../../../_services/print-receipt-di
 
 @Component({
   selector: 'app-pos-form',
-  templateUrl: './pos-form.component.html',
-  styleUrls: ['./pos-form.component.scss']
+  templateUrl: './pos-form.component.html'
 })
-export class PosFormComponent implements OnInit {
+export class PosFormComponent implements OnInit,OnChanges {
 
-  @Input() items : GroupItem[];
+  @Input() services : ServicesType[];
   @Input() totalPrice : number = 0;
   @Output() cash  = new EventEmitter<number>();
   @Output() saveProgress = new EventEmitter<boolean>();
@@ -35,10 +34,12 @@ export class PosFormComponent implements OnInit {
       this.createForm();
    }
 
-  ngOnInit() {
+  ngOnInit() {}
 
-    
-
+  ngOnChanges(){
+    this.posForm.patchValue({
+      totalCost : this.totalPrice
+    });
   }
 
 
@@ -47,7 +48,8 @@ export class PosFormComponent implements OnInit {
     this.posForm = this._fb.group({
       rrNo          : [null,[Validators.required,Validators.minLength(1)]],
       amountPaid    : [null,[Validators.required,Validators.minLength(1)]],
-      customer      : [null]
+      customer      : [null],
+      totalCost     : [null]
     });
   }
 
@@ -63,7 +65,7 @@ export class PosFormComponent implements OnInit {
     confirm.subscribe((res) => {
       const pos = {
             details : this.posForm.value,
-            items   : this.items
+            items   : this.services
       };
       this._loader.openSpinner();
       this._service.storeItems(pos)
@@ -78,7 +80,7 @@ export class PosFormComponent implements OnInit {
                 };
                 this._receipt.openPrint(data);
                 this.posForm.reset();
-                this.items = [];
+                this.services = [];
                 this.totalPrice = 0;
                 this.saveProgress.emit(true);
               }

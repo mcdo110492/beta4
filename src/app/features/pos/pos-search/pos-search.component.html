@@ -5,8 +5,8 @@
       <md-progress-spinner *ngIf="isLoader" mode="indeterminate" color="primary" class="search-loader" mdSuffix></md-progress-spinner>
   </md-input-container>
   <md-autocomplete #auto="mdAutocomplete" [displayWith]="displayItem"  >
-    <md-option *ngFor="let item of items" [value]="item" (click)="selectedItemFn(item)" >
-       {{ item.groupName }} - {{ item.itemName }} Php {{item.itemPrice | number : '1.2-2'}}
+    <md-option *ngFor="let item of services" [value]="item" (click)="selectedItemFn(item)" >
+       <i *ngIf="item.service_category" >{{ item.service_category.serviceCategoryName }}- </i> {{ item.serviceCode }} - {{ item.serviceName }} / Php {{item.cost | number : '1.2-2'}}
     </md-option>
  </md-autocomplete>
 </form>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GroupItem } from './../group/group-item/group-item.model';
+import { ServicesType } from './../services-type/services-type.model';
 
 import { PosService } from './pos.service';
 
@@ -16,7 +16,7 @@ import { ProgressDialogService } from './../../_services/progress-dialog.service
 })
 export class PosComponent implements OnInit {
   
-  selectedItems : GroupItem[] = [];
+  selectedServices : ServicesType[] = [];
   totalItems : number = 0;
   totalPrice : number = 0;
   cash       : number = 0;
@@ -34,19 +34,19 @@ export class PosComponent implements OnInit {
   }
 
   addQty(index : number){
-    this.selectedItems[index].qty = this.selectedItems[index].qty + 1;
+    this.selectedServices[index].serviceQty = this.selectedServices[index].serviceQty + 1;
     this.totalItems += 1;
-    this.totalPrice += +this.selectedItems[index].itemPrice;
-    this.cashChange -= (this.cash) ? +this.selectedItems[index].itemPrice : 0;
+    this.totalPrice += +this.selectedServices[index].cost;
+    this.cashChange -= (this.cash) ? +this.selectedServices[index].cost : 0;
   }
 
   subtractQty(index : number){
 
-    if(this.selectedItems[index].qty > 1){
-      this.selectedItems[index].qty = this.selectedItems[index].qty - 1;
+    if(this.selectedServices[index].serviceQty > 1){
+      this.selectedServices[index].serviceQty = this.selectedServices[index].serviceQty - 1;
       this.totalItems -= 1;
-      this.totalPrice -= +this.selectedItems[index].itemPrice;
-      this.cashChange -= (this.cash) ? +this.selectedItems[index].itemPrice : 0;
+      this.totalPrice -= +this.selectedServices[index].cost;
+      this.cashChange -= (this.cash) ? +this.selectedServices[index].cost : 0;
     }
     else{
       this._toaster.showCustom('info','Minimum Quantity','Item must have a minimum quantity of 1.');
@@ -54,28 +54,30 @@ export class PosComponent implements OnInit {
     
   }
 
-  removeItem(index : number, item : GroupItem){
-    this.totalItems -= +this.selectedItems[index].qty;
-    this.totalPrice -= (+this.selectedItems[index].itemPrice * +this.selectedItems[index].qty);
-    this.cashChange += (this.cash) ? (+this.selectedItems[index].itemPrice * +this.selectedItems[index].qty) : 0;
-    this.selectedItems.splice(index,1);
+  removeItem(index : number, item : ServicesType){
+    this.totalItems -= +this.selectedServices[index].serviceQty;
+    this.totalPrice -= (+this.selectedServices[index].cost * +this.selectedServices[index].serviceQty);
+    this.cashChange += (this.cash) ? (+this.selectedServices[index].cost * +this.selectedServices[index].serviceQty) : 0;
+    this.selectedServices.splice(index,1);
   }
 
-  selectedItemFn(item : GroupItem){
+  selectedItemFn(item : ServicesType){
 
-    const isExist = this.selectedItems.findIndex( i => i.item_price == item.item_price );
+    const isExist = this.selectedServices.findIndex( i => i.serviceId == item.serviceId );
     
     if(isExist == -1){
-      item.qty = 1;
-      this.selectedItems.push(item);
+      item.serviceQty = 1;
+      this.selectedServices.push(item);
       this.totalItems += 1;
-      this.totalPrice += +item.itemPrice;
+      this.totalPrice += +item.cost;
     }
     else{
-      this.selectedItems[isExist].qty = this.selectedItems[isExist].qty + 1;
+      this.selectedServices[isExist].serviceQty = this.selectedServices[isExist].serviceQty + 1;
       this.totalItems += 1;
-      this.totalPrice += +item.itemPrice;
+      this.totalPrice += +item.cost;
     }
+
+    console.log(item);
   }
 
   logCashFn(cash : number){
@@ -87,7 +89,7 @@ export class PosComponent implements OnInit {
 
     if(progress){
       this.totalCollection += this.totalPrice;
-      this.selectedItems = [];
+      this.selectedServices = [];
       this.totalItems    = 0;
       this.totalPrice    = 0;
       this.cash          = 0;

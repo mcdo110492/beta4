@@ -86,11 +86,9 @@ export class BaptismComponent implements OnInit, OnDestroy {
         .subscribe( response => {
             this._tableDatabaseService.tableDataStream$.next(response.data);
             this.pageDataLength = response.count;
-            
+            this._loader.closeSpinner()
         },
-        (err) => { this._errHandler.errorHandler(err); this._loader.closeSpinner(); },
-        () => this._loader.closeSpinner()
-      );
+        (err) => { this._errHandler.errorHandler(err); this._loader.closeSpinner(); });
 
 
 

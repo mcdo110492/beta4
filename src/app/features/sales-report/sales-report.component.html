@@ -1,0 +1,48 @@
+
+<app-title-bar [title]="'Sales Report'" [upload]="true" ></app-title-bar>
+
+<md-card>
+  <md-card-header>
+    <app-sales-report-form (dateRequest)="reportEventFn($event)" ></app-sales-report-form>
+  </md-card-header>
+  <md-card-content class="table-report-content">
+      <table id="report" *ngIf="salesIndividual" >
+        <thead>
+          <tr>
+            <th>Item(s)</th>
+            <th>Total Sales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sale of salesIndividual">
+            <td>{{ sale.items.serviceCode }} - {{ sale.items.serviceName }} </td>
+            <td>{{ sale.totalCost | number : '1.2-2' }} </td>
+          </tr>
+          <tr>
+            <td>Net Total Sales: </td>
+            <td>{{ totalSales | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table id="report" *ngIf="salesCategories" >
+          <thead>
+            <tr>
+              <th>Item(s)</th>
+              <th>Total Sales</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sale of salesCategories">
+              <td>{{ sale.items.serviceCategoryName }} </td>
+              <td>{{ sale.totalCost | number : '1.2-2' }} </td>
+            </tr>
+            <tr>
+              <td>Net Total Sales: </td>
+              <td>{{ totalSales | number:'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+        
+  </md-card-content>
+</md-card>

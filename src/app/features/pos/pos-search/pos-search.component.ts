@@ -7,7 +7,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/do';
 
 
-import { GroupItem } from './../../group/group-item/group-item.model';
+import { ServicesType } from './../../services-type/services-type.model';
 import { PosService } from './../pos.service';
 
 
@@ -20,9 +20,9 @@ import { ErrorHandlerService } from './../../../_services/error-handler.service'
 })
 export class PosSearchComponent implements OnInit, OnDestroy {
 
-  @Output() selectedItem = new EventEmitter<GroupItem>();
+  @Output() selectedServices = new EventEmitter<ServicesType>();
 
-  items : GroupItem[];
+  services : ServicesType[];
   searchFilter : string;
   latestSearchFilter = new Subject<string>();
   isLoader   : boolean = false;
@@ -35,10 +35,10 @@ export class PosSearchComponent implements OnInit, OnDestroy {
         .do(() => this.isLoader = true)
         .debounceTime(300)
         .distinctUntilChanged()
-        .switchMap( search => this._service.getItems(search) )
+        .switchMap( search => this._service.getServices(search) )
         .subscribe( response => {
           this.isLoader = false;
-          this.items = response;
+          this.services = response;
         },
         (err) => { this._errHandler.errorHandler(err); this.isLoader = false; });
   }
@@ -51,8 +51,8 @@ export class PosSearchComponent implements OnInit, OnDestroy {
     return  '' ;
   }
 
-  selectedItemFn(item : GroupItem){
-    this.selectedItem.emit(item);
+  selectedItemFn(service : ServicesType){
+    this.selectedServices.emit(service);
   }
 
   ngOnDestroy(){

@@ -13,27 +13,44 @@ export const superAdminMetaData = [
         { title : 'death', routeUrl : 'death', icon :'view_list' },
         { title : 'marriage', routeUrl : 'marriage', icon :'view_list' }
       ] 
-    }
-    ,
-    { isHeader : true, header : 'accounting' , 
+    },
+    {
+      isHeader : true, header : 'services',
       list :[
-        { title : 'item type', routeUrl : 'item/type' ,icon :'format_list_bulleted' },
-        { title : 'item price', routeUrl : 'item/price' ,icon :'format_list_bulleted' },
-        { title : 'group', routeUrl : 'group' ,icon :'format_list_bulleted' },
-        { title : 'pos', routeUrl : 'pos' ,icon :'monetization_on' },
-        { title : 'invoices', routeUrl : 'invoices' ,icon :'receipt' },
-        { title : 'invoice reports', routeUrl : 'invoice/reports' ,icon :'library_books' }
-      ] 
+        {title : 'categories' , routeUrl : 'services/categories' , icon : 'format_list_bulleted'},
+        {title : 'type' , routeUrl : 'services/type' , icon : 'format_list_bulleted'},
+      ]
+    },
+    {
+      isHeader : true, header : 'sales',
+      list :[
+        {title : 'pos' , routeUrl : 'sales/pos' , icon : 'monetization_on'},
+        {title : 'sales list' , routeUrl : 'sales/list' , icon : 'library_books'},
+        {title : 'reports' , routeUrl : 'sales/report' , icon : 'library_books'},
+      ]
+    },
+    {
+      isHeader : true, header : 'expenses',
+      list :[
+        {title : 'categories' , routeUrl : 'expenses/categories' , icon : 'format_list_bulleted'},
+        {title : 'type' , routeUrl : 'expenses/type' , icon : 'format_list_bulleted'},
+        {title : 'reports' , routeUrl : 'expenses/reports' , icon : 'library_books'},
+      ]
     }
 ];
 
 export const recordMetaData = [
-    { isHeader : true, header : 'certificates' , 
-      list :[
-        { title : 'baptism', routeUrl : 'baptism' ,icon :'view_list' },
-        { title : 'confirmation', routeUrl : 'confirmation', icon :'view_list' },
-        { title : 'death', routeUrl : 'death', icon :'view_list' },
-        { title : 'marriage', routeUrl : 'marriage', icon :'view_list' }
-      ] 
-    }
+    { isHeader : true, header : 'master data' , 
+    list :[
+      { title : 'minister', routeUrl : 'minister', icon :'storage' }
+    ] 
+  },
+  { isHeader : true, header : 'certificates' , 
+    list :[
+      { title : 'baptism', routeUrl : 'baptism' ,icon :'view_list' },
+      { title : 'confirmation', routeUrl : 'confirmation', icon :'view_list' },
+      { title : 'death', routeUrl : 'death', icon :'view_list' },
+      { title : 'marriage', routeUrl : 'marriage', icon :'view_list' }
+    ] 
+  }
 ];

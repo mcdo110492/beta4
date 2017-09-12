@@ -1,26 +1,28 @@
 
+import { ServicesType } from './../services-type/services-type.model';
 
 export class Pos {
-    invoiceId       :   number;
+    serviceSalesId       :   number;
     rrNo            :   number;
     dateIssued      :   Date;
     amountPaid      :   number;
-    discount        :   number;
+    totalCost       :   number;
+    customer?       :   string;
     status          :   number;
     user_id         :   number;
-    items           :   Items[];
+    services        :   ServiceItems[];
     created_at?     :   Date;
     updated_at?     :   Date;
 }
 
 
-class Items {
-    invoiceItemId       :   number;
-    invoiceId           :   number;
-    itemTypeId          :   number;
-    groupId             :   number;
-    currentPrice        :   number;
-    qty                 :   number;
-    created_at?         :   Date;
-    updated_at?         :   Date;
+ export class ServiceItems {
+    serviceSaleItemId       :   number;
+    serviceId               :   number;
+    service_type?           :   ServicesType;
+    serviceCost             :   number;
+    serviceQty              :   number;
+    serviceSalesId          :   number;
+    created_at?             :   Date;
+    updated_at?             :   Date;
 }

@@ -2,7 +2,7 @@
 
   <div fxFlex>
 
-    <app-pos-search (selectedItem)="selectedItemFn($event)" ></app-pos-search>
+    <app-pos-search (selectedServices)="selectedItemFn($event)" ></app-pos-search>
 
   <div id="items-table">
 
@@ -17,18 +17,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of selectedItems; let i = index">
-                <td>{{ item.groupName }} - {{ item.itemName }} </td>
+              <tr *ngFor="let item of selectedServices; let i = index">
+                <td> <div *ngIf="item.service_category" >{{ item.service_category.serviceCategoryName }} -</div> {{ item.serviceName }} </td>
                 <td>
                   <button md-icon-button mdTooltip="Add 1 Quantity" mdTooltipPosition="above" color="accent" (click)="addQty(i)" >
                       <md-icon>add</md-icon>
                   </button>
-                  <span>{{item.qty}}</span>
+                  <span>{{item.serviceQty}}</span>
                   <button md-icon-button mdTooltip="Subtract 1 Quantity" mdTooltipPosition="above" color="warn" (click)="subtractQty(i)">
                       <md-icon>remove</md-icon>
                   </button>
                 </td>
-                <td>{{ item.itemPrice | number: '1.2-2' }}</td>
+                <td>{{ item.cost | number: '1.2-2' }}</td>
                 <td>
                     <button md-icon-button mdTooltip="Remove Item from the list" mdTooltipPosition="above" color="warn" (click)="removeItem(i,item)" >
                         <md-icon >delete_forever</md-icon>
@@ -72,7 +72,7 @@
   </div>
 
   <md-card fxFlex>
-    <app-pos-form [items]="selectedItems" [totalPrice]="totalPrice" (cash)="logCashFn($event)" (saveProgress)="saveProgressFn($event)" ></app-pos-form>
+    <app-pos-form [services]="selectedServices" [totalPrice]="totalPrice" (cash)="logCashFn($event)" (saveProgress)="saveProgressFn($event)" ></app-pos-form>
   </md-card>
 
 </md-card>

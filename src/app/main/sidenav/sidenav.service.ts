@@ -16,7 +16,7 @@ export class SidenavService {
     if(role == 1){
       this.sidenavMetaDataStream$.next(superAdminMetaData);
     }
-    else {
+    else if(role == 2) {
       this.sidenavMetaDataStream$.next(recordMetaData);
     }
   }
