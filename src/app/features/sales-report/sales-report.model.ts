@@ -1,6 +1,5 @@
 
 import { ServicesType } from './../services-type/services-type.model';
-import { ServicesCategories } from './../services-categories/services-categories.model';
 
 export class SalesIndividual {
     items       :   ServicesType;
@@ -8,6 +7,7 @@ export class SalesIndividual {
 }
 
 export class SalesByCategory {
-    items       :   ServicesCategories;
-    totalCost   :   number;
+    itemName       :   string;
+    totalCost      :   number;
+    isCategory     :   boolean;
 }

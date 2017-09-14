@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
-import { superAdminMetaData, recordMetaData } from './sidenav.metadata';
+import { superAdminMetaData, recordMetaData, accountingMetaData } from './sidenav.metadata';
 
 @Injectable()
 export class SidenavService {
@@ -18,6 +18,9 @@ export class SidenavService {
     }
     else if(role == 2) {
       this.sidenavMetaDataStream$.next(recordMetaData);
+    }
+    else if(role == 3){
+      this.sidenavMetaDataStream$.next(accountingMetaData);
     }
   }
 

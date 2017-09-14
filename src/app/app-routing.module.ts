@@ -26,7 +26,10 @@ const routes: Routes = [
      { path: 'sales/list', loadChildren: 'app/features/sales/sales.module#SalesModule', canLoad:[AuthGuardStateService] },
      { path: 'sales/report', loadChildren: 'app/features/sales-report/sales-report.module#SalesReportModule', canLoad:[AuthGuardStateService] },
      { path: 'expenses/categories', loadChildren: 'app/features/expenses-categories/expenses-categories.module#ExpensesCategoriesModule', canLoad:[AuthGuardStateService] },
+     { path: 'expenses/list', loadChildren: 'app/features/expenses/expenses.module#ExpensesModule', canLoad:[AuthGuardStateService] },
      { path: 'expenses/type', loadChildren: 'app/features/expenses-type/expenses-type.module#ExpensesTypeModule', canLoad:[AuthGuardStateService] },
+     { path: 'expenses/report', loadChildren: 'app/features/expenses-report/expenses-report.module#ExpensesReportModule', canLoad:[AuthGuardStateService] },
+     { path: 'profile', loadChildren: 'app/features/user-profile/user-profile.module#UserProfileModule', canLoad:[AuthGuardStateService] },
    ]
  },
 ];

@@ -9,21 +9,27 @@ export class ProgressDialogService {
 
    dialogRef : MdDialogRef<ProgressDialogComponent>
    dialogConfig : MdDialogConfig = {
-     disableClose : true
+     disableClose : true,
+    
    }
 
   constructor(private _dialog : MdDialog) { }
 
   openSpinner(){
+
     setTimeout(() => {
       this.dialogRef = this._dialog.open(ProgressDialogComponent,this.dialogConfig);
     },0);
-    
+      
   }
 
 
   closeSpinner(){
-    this.dialogRef.close();
+    
+    setTimeout(() => {
+      this.dialogRef.close();
+    },0);
+    
   }
 
 }

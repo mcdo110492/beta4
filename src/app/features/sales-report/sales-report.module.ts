@@ -8,6 +8,7 @@ import { SalesReportComponent } from './sales-report.component';
 
 import { SalesReportService } from './sales-report.service';
 import { SalesReportFormComponent } from './sales-report-form/sales-report-form.component';
+import { SalesReportPrintComponent } from './sales-report-print/sales-report-print.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { SalesReportFormComponent } from './sales-report-form/sales-report-form.
     TitleBarModule,
     SalesReportRoutingModule
   ],
-  declarations: [SalesReportComponent, SalesReportFormComponent],
+  declarations: [SalesReportComponent, SalesReportFormComponent, SalesReportPrintComponent],
   providers:[SalesReportService]
 })
 export class SalesReportModule { }

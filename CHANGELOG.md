@@ -1,4 +1,14 @@
 
+
+# September 15, 2017
+
+* Added Expense Report Module
+* Added User Profile Settings Module
+* Refactor the PdfService from _service/pdf.service
+* Refactor Login Module for the accounting login interface
+* Refactor SideNav Module for the navigation routes list of the accounting
+
+
 # September 13, 2017
 
 * Remove item-type, item-price, item-group features

@@ -9,7 +9,6 @@ import { SidenavService } from './sidenav.service';
   providers:[SidenavService]
 })
 export class SidenavComponent implements OnInit, OnDestroy {
-
   sideNavList;
 
   constructor(private _sidenavService : SidenavService) { }

@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     this._authService
                 .authenticateCredentials(this.loginForm.value)
                 .subscribe( (res) => {
-                  
+                  this._loader.closeSpinner();
                   if(res.status == 200){
                     const userStatus = {
                       token : res.token,
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('presence',JSON.stringify(userStatus));
                     localStorage.setItem('profileName',res.profileName);
                     localStorage.setItem('profilePic',res.profilePic);
-                    this._loader.closeSpinner();
+                    
                     
                     this.checkLoginStatus();
                   }
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
                   }
                   
                 },
-               (err) => { this._errHandler.errorHandler(err); this._loader.closeSpinner() });
+               (err) => { this._errHandler.errorHandler(err); this._loader.closeSpinner(); });
   }
 
 
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
                         break;
                       
                       case 3:
-                        this._router.navigateByUrl('/main/pos');
+                        this._router.navigateByUrl('/main/sales/pos');
                         break;
                   
                     }
@@ -97,7 +97,6 @@ export class LoginComponent implements OnInit {
       
     } catch (error) {
       localStorage.clear();
-      console.log('Unable to parse Token');
 
     }
     

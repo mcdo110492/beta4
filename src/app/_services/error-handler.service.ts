@@ -26,7 +26,11 @@ export class ErrorHandlerService {
         else if(err.status == 422){
           this._toastr.showCustom('warning','UNPROCESSED REQUEST','Please make sure you correctly meet the form requirements.');
         }
+        else{
+          this._toastr.showCustom('error','Server Connection Error','Server is out of reach. Check your connection.');
+        }
     }
+    
   }
 
 }
